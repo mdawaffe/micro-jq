@@ -170,6 +170,12 @@ describe('create array', () => {
     const script = '[ .foo[1].bar ]'
     expect(executeScript(input, script)).toEqual([2])
   })
+
+  test('from explosion', () => {
+    const input = { foo: [ { bar: 1, baz: 'one' }, { bar: 2, baz: 'two' } ] }
+    const script = '.foo[] | [ .bar, .baz ]'
+    expect(executeScript(input, script)).toEqual([[1, 'one'], [2, 'two']])
+  })
 })
 
 describe('create object', () => {
