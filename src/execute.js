@@ -87,8 +87,12 @@ function evaluateOpCodes(context, opCodes) {
             return result
           }
           // Consume all remaining opCodes in each explode branch.
-          result.push(each.map(item => evaluateOpCodes([item], JSON.parse(JSON.stringify(opCodes)))))
-          opCodes = [];
+          if (opCodes.length) {
+              result.push(each.map(item => evaluateOpCodes([item], JSON.parse(JSON.stringify(opCodes)))))
+              opCodes = [];
+          } else {
+              result.push(each)
+          }
           return result
         }, [])
         break
