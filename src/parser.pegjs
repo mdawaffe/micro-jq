@@ -29,6 +29,15 @@ _ "whitespace"
 Pipe
   = "|"
 
+Alternative
+  = lhs:Filter _ "//" _ rhs:Filter {
+    return {
+      op: 'alternative',
+      lhs: lhs,
+      rhs: rhs,
+    }
+  }
+
 Filter
   = Traversal+
 
@@ -93,6 +102,7 @@ Operation
   = Literal      // Must be bare
   / CreateArray  // Must be bare
   / CreateObject // Must be bare
+  / Alternative  // Must have context
   / Filter       // Must have context
 
 Literal

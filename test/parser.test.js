@@ -278,6 +278,30 @@ Array [
 `)
 })
 
+test('pick with alternative operator', () => {
+  expect(parse('.foo // .bar')).toMatchInlineSnapshot(`
+Array [
+  Object {
+    "lhs": Array [
+      Object {
+        "key": "foo",
+        "op": "pick",
+        "strict": true,
+      },
+    ],
+    "op": "alternative",
+    "rhs": Array [
+      Object {
+        "key": "bar",
+        "op": "pick",
+        "strict": true,
+      },
+    ],
+  },
+]
+`)
+})
+
 describe('create arrays', () => {
   test('create an array', () => {
     expect(parse('[ 1 ]')).toMatchInlineSnapshot(`

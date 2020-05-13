@@ -18,6 +18,15 @@ function evaluateOpCodes(context, opCodes) {
       case 'current_context':
         break
 
+      case 'alternative':
+        const lhs = evaluateOpCodes(context, opCode.lhs)
+        if (lhs === null || lhs === false || undefined === lhs) {
+          context = [ evaluateOpCodes(context, opCode.rhs) ]
+        } else {
+          context = [ lhs ]
+        }
+        break;
+
       case 'literal':
         context = [opCode.value]
         break

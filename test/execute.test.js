@@ -107,6 +107,12 @@ describe('pick values', () => {
     const script = '.foo[1].bar'
     expect(executeScript(input, script)).toEqual(2)
   })
+
+  test('pick by alternative', () => {
+    const input = [ { bar: 1 }, { bar: 2 }, { baz: 3 } ]
+    const script = '.[] | .bar // .baz'
+    expect(executeScript(input, script)).toEqual([1, 2, 3])
+  })
 })
 
 describe('lazy operator', () => {
